@@ -1,0 +1,68 @@
+@import "outercurve.inc";
+
+package {
+    name: "CoApp.Mg";
+    display-name: "CoApp.Mg";
+}
+
+provides {
+    feature: "coapp.mg" = "1.0";
+}
+
+requires {
+	package: "caliburn.micro-1.3.1.0";
+}
+
+metadata {
+    summary: "CoApp.Mg";
+    description: "CoApp.Mg";
+    icon: @"images\logo.png";
+    
+    author-version : "1.0";
+    bug-tracker: "";
+    stability : "0";
+}
+
+compatability-policy {
+    minimum: "0.0.0.0";
+    maximum: "${OneLessThanCurrent}";
+    versions : {
+        "1.0",
+    };
+}
+
+files[all] {
+    include: {
+		exes,
+        dlls,
+    };
+};
+
+files[exes] {
+    root: "..\output\any\release\bin";
+    
+    include: {
+        "CoApp.Mg.PackageManager.exe",
+    };
+};
+
+files[dlls] {
+    root: "..\output\any\release\bin";
+    
+    include: {
+        "CoApp.Mg.Toolkit.dll",
+    };
+};
+
+application {
+    include : {
+		all
+    };
+};
+
+package-composition {
+    shortcuts : { 
+        @"${bin}\CoApp.Mg.lnk" = @"${packagedir}\CoApp.Mg.PackageManager.exe";
+        @"${apps}\start menu\CoApp\CoApp.Mg.lnk" = @"${packagedir}\CoApp.Mg.PackageManager.exe";
+    };
+};

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{935CE788-EEB6-433E-87E8-79A41E541950}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoApp.Mg.Toolkit</RootNamespace>
+    <AssemblyName>CoApp.Mg.Toolkit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\output\any\Debug\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\output\any\Release\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Caliburn.Micro" />
+    <Reference Include="System.Windows.Interactivity" />
+    <Reference Include="CoApp.Client" />
+    <Reference Include="CoApp.Toolkit" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CoAppApplication.cs" />
+    <Compile Include="MgConstants.cs" />
+    <Compile Include="Models\Filter.cs" />
+    <Compile Include="Models\Options.cs" />
+    <Compile Include="ViewModels\ApplyViewModel.cs" />
+    <Compile Include="ViewModels\DownloadViewModel.cs" />
+    <Compile Include="ViewModels\SummaryViewModel.cs" />
+    <Compile Include="ViewModels\MarkAdditionalChangesViewModel.cs" />
+    <Compile Include="Views\MarkAdditionalChangesView.xaml.cs">
+      <DependentUpon>MarkAdditionalChangesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Events.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Views\ApplyView.xaml.cs">
+      <DependentUpon>ApplyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DialogBase.cs" />
+    <Compile Include="Views\DownloadView.xaml.cs">
+      <DependentUpon>DownloadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Views\SummaryView.xaml.cs">
+      <DependentUpon>SummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="Views\PropertiesView.xaml.cs">
+      <DependentUpon>PropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\PackageMarkConverters.cs" />
+    <Compile Include="Models\PackageModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="CoAppService.cs" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Styles\Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ApplyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MarkAdditionalChangesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DownloadView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SummaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PropertiesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

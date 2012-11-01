@@ -1,0 +1,63 @@
+﻿<Window x:Class="CoApp.Mg.PackageManager.Views.AppView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
+        MinWidth="800" MinHeight="540"
+        Width="800" Height="540"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/CoApp.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Read Markings..." Name="ReadMarkings"/>
+                <MenuItem Header="Save Markings As..." Name="SaveMarkingsAs"/>
+                <Separator/>
+                <MenuItem Header="Exit" Name="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Unmark All" Name="UnmarkAll"/>
+                <MenuItem Header="Apply Marked Changes" cal:Message.Attach="[Event Click] = [Action Apply]"/>
+            </MenuItem>
+            <MenuItem Header="Package">
+                <MenuItem Header="Unmark" Name="Unmark"/>
+                <MenuItem Header="Mark for Installation" Name="MarkForInstallation"/>
+                <MenuItem Header="Mark for Reinstallation" Name="MarkForReinstallation"/>
+                <MenuItem Header="Mark for Update" Name="MarkForUpdate"/>
+                <MenuItem Header="Mark for Removal" Name="MarkForRemoval"/>
+                <Separator />
+                <MenuItem Header="Lock Package" Name="LockPackage" IsChecked="{Binding IsLocked, Mode=OneWay}"/>
+                <Separator />
+                <MenuItem Header="Properties" cal:Message.Attach="[Event Click] = [Action Properties]"/>
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="Options" Name="Options"/>
+                <MenuItem Header="Repositories" Name="Repositories"/>
+                <MenuItem Header="Filters" Name="Filters"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Contents" Name="Contents"/>
+                <MenuItem Header="About" Name="About"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Grid.Row="1">
+            <ToolBar>
+                <Button Content="Reload" Name="Reload"/>
+                <Button Content="Apply" Name="Apply"/>
+                <Button Content="Properties" Name="Properties"/>
+            </ToolBar>
+        </ToolBarTray>
+        <ContentControl Grid.Row="2" Name="PackageViewModel" IsEnabled="{Binding IsReady}"/>
+        <StatusBar Grid.Row="3" Height="23">
+            <StatusBarItem>
+                <TextBlock Name="Status" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

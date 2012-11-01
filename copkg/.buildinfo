@@ -1,0 +1,71 @@
+#product-info {
+    product-name: "CoApp.Mg";
+    original-source-location: "";
+    original-source-website: "";
+    license: "Apache2.0";
+    packager: "henrik juvonen <henjuv@utu.fi>";
+}
+
+build {
+    uses: release;
+}
+
+release {
+    set: cfg = "Release";
+    uses: anycpu;
+}
+
+package {
+	default: true;
+    uses: sign;
+    build-command: @"
+        cscript //e:jscript scripts\increment-build-version.js
+        cd COPKG
+        autopackage coapp.mg.autopkg || goto failed
+        erase /Q *.wixpdb > nul 2>&1
+    ";
+}
+
+install {
+    uses: package;
+    build-command: @"
+        for /F %%G in ('dir /s /b /o-n  coapp.mg*.msi') do ( 
+            coapp install %%G
+            goto :eof
+        )
+    ";
+}
+
+sign {
+    set: bin_path = @"output\any\release\bin\";
+    uses: release;
+    
+    build-command: @"
+        simplesigner --nologo --sign --strong-name ${bin_path}CoApp.Mg.PackageManager.exe ${bin_path}CoApp.Mg.Toolkit.dll || goto failed
+    ";
+}
+
+anycpu {
+    compiler: vc11;
+    set: bin_path = @"output\any\${cfg}\bin\";
+    uses: clean;
+	
+    requires: "caliburn.micro-1.3.1.0";
+	
+    targets: {
+        "${bin_path}CoApp.Mg.PackageManager.exe",
+        "${bin_path}CoApp.Mg.Toolkit.dll",
+    };
+
+    build-command: @"
+		msbuild /p:Configuration=${cfg} /p:Platform=""Any CPU"" CoApp.Mg.sln /verbosity:q /nologo || goto failed
+    ";
+}
+
+clean {    
+    clean-command: @"
+        for /d %%v in (*) do if exist %%v\obj rmdir /s /q %%v\obj > nul 2>&1
+        for /d %%v in (*) do if exist %%v\bin rmdir /s /q %%v\bin > nul 2>&1
+		rmdir /s /q output > nul 2>&1
+    ";
+}

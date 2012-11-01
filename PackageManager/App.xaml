@@ -1,0 +1,15 @@
+﻿<Toolkit:CoAppApplication x:Class="CoApp.Mg.PackageManager.App"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:PackageManager="clr-namespace:CoApp.Mg.PackageManager"
+                          xmlns:Toolkit="clr-namespace:CoApp.Mg.Toolkit;assembly=CoApp.Mg.Toolkit">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <PackageManager:AppBootstrapper x:Key="bootstrapper" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Toolkit:CoAppApplication>
